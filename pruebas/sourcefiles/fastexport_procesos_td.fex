@@ -1,0 +1,23 @@
+
+
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/tmp_zcarga_DIARIO_todo
+  FORMAT TEXT MODE RECORD;
+
+
+SELECT CAST(TRIM(proceso) || ';' || TRIM(fase_carga) || ';' || ind_critico AS CHAR(53))
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+CROSS JOIN &bd_ctl&.CTL_FECHAS_V
+WHERE 
+  (ind_activo = 'S' AND  fase_carga in ('FASE_1','FASE_1_ALMACEN') AND hoy_es_festivo_palau = 'No')
+  OR (ind_activo = 'S' AND  fase_carga in ('FASE_1','FASE_1_LS', 'FASE_4B', 'FASE_EV_SEM') AND hoy_es_festivo_palau = 'Sí')
+  --OR (ind_activo = 'S' AND  fase_carga in ('FASE_SAS') AND hoy_es_festivo_palau = 'Sí' AND des_dia_de_semana = 'Domingo')
+  OR proceso in ('finaliza_carga.sql','envia_email_final.sh','ctl_tablas_pdte_borrado.sql')
+ORDER BY fase_carga, orden_proceso;
+
+
+.END EXPORT;
+
+.LOGOFF;

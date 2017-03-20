@@ -1,0 +1,3 @@
+CREATE TABLE TGT_EXP_EXISTS( 
+MONTH_ID_IN integer(10)
+);

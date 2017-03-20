@@ -1,0 +1,19 @@
+
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/procesos_fase_2_3_4.txt
+  FORMAT TEXT MODE RECORD;
+
+SELECT CAST(TRIM(proceso) || ';' || TRIM(fase_carga) || ';' || ind_critico AS CHAR(53))
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+CROSS JOIN &bd_ctl&.CTL_FECHAS_V
+WHERE 
+  hoy_es_festivo_palau = 'No' AND
+  ((ind_activo = 'S' AND  fase_carga in ('FASE_2','FASE_3','FASE_3B','FASE_4'))
+  OR proceso in ('finaliza_carga.sql','envia_email_final.sh'))
+ORDER BY fase_carga, orden_proceso;
+
+.END EXPORT;
+
+.LOGOFF;

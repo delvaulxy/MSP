@@ -1,0 +1,6 @@
+CREATE TABLE DPIT4FAC_DET_PEDIDOS_INTERNET( 
+AID_DIVISA varchar(10),
+AFEC_DIA varchar(10),
+AID_DIVISA, varchar(10),
+AFEC_DIA, varchar(10)
+);

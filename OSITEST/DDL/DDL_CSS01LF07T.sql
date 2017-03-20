@@ -1,0 +1,5 @@
+CREATE TABLE CSS01LF07T( 
+BASE_YEAR_ACCUM_ID integer(10),
+YEAR_ACCUM_ID smallint(5),
+YEAR_ID integer(10)
+);

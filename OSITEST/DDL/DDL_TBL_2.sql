@@ -1,0 +1,6 @@
+CREATE TABLE TBL_2( 
+AID_DIVISA varchar(10),
+AFEC_DIA varchar(10),
+BID_DIVISA varchar(10),
+BFECHA_VIGENCIA varchar(10)
+);

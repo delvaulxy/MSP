@@ -1,0 +1,20 @@
+
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE /MNG/DWH/INTERCAMBIOS/TMP/procesos_fase0.txt
+  FORMAT TEXT MODE RECORD;
+
+SELECT CAST(TRIM(proceso) AS CHAR(50))
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+CROSS JOIN &bd_dwh&.DWH_DIA d 
+WHERE 
+  d.fec_dia=cast('&fecha_carga&' AS DATE FORMAT 'YYYYMMDD')+1
+  AND es_festivo_palau='No'
+  AND ind_activo = 'S' 
+  AND fase_carga in ('FASE_0')
+ORDER BY fase_carga, orden_proceso;
+
+.END EXPORT;
+
+.LOGOFF;

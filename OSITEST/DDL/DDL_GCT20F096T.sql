@@ -1,0 +1,5 @@
+CREATE TABLE GCT20F096T( 
+CLAIM_ID varchar(30),
+CLAIM_DESC varchar(2000),
+RUN_ID integer(10)
+);

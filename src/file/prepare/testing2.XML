@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!DOCTYPE POWERMART SYSTEM "powrmart.dtd">
+<POWERMART>
+    <REPOSITORY NAME="XDIPCRS" DATABASETYPE="DB2" CODEPAGE="Latin1" VERSION="184">
+        <FOLDER NAME="GENERATED FOLDER" DESCRIPTION="Everis : Antonio Jesus, Group for Global Corporate Teaser Tool(GCT), Developer, antonio.jesus.munoz.lapaz@zurich.com" SHARED="NOTSHARED" OWNER="w991593" PERMISSIONS="rwx---r--" UUID="55cd59eb-588d-4840-8dee-97c3257a4945">
+            <WORKFLOW NAME="wf_FIL_CLEANSE" DESCRIPTION="This workflow has been generated from...." SERVERNAME="dipcis01" SERVER_DOMAINNAME="dinfadm01" SCHEDULERNAME="Scheduler" REUSABLE_SCHEDULER="NO" ISVALID="YES" ISENABLED="YES" SUSPEND_ON_ERROR="NO" TASKS_MUST_RUN_ON_SERVER="NO" VERSIONNUMBER="1" ISSERVICE="NO" ISRUNNABLESERVICE="NO">
+                <SCHEDULER NAME="Scheduler" DESCRIPTION="" REUSABLE="NO" VERSIONNUMBER="1">
+                    <SCHEDULEINFO SCHEDULETYPE="ONDEMAND"/>
+                </SCHEDULER>
+                <TASK NAME="Start" DESCRIPTION="" TYPE="Start" REUSABLE="NO" VERSIONNUMBER="1"/>
+                <SESSION NAME="s_m_FIL_CLEANSE" DESCRIPTION="" REUSABLE="NO" ISVALID="YES" MAPPINGNAME="m_FIL_CLEANSE" SORTORDER="Binary" VERSIONNUMBER="1">
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="SRC_EXP_LENGHT" TRANSFORMATIONNAME="SRC_EXP_LENGHT" TRANSFORMATIONTYPE="Source Definition" ISREPARTITIONPOINT="NO" STAGE="0" PIPELINE="0"/>
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="SQ_EXP_LENGHT" TRANSFORMATIONNAME="SQ_EXP_LENGHT" TRANSFORMATIONTYPE="Source Qualifier" PARTITIONTYPE="PASS THROUGH" ISREPARTITIONPOINT="YES" STAGE="1" PIPELINE="0"/>
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="TGT_FIL_CLEANSE" TRANSFORMATIONNAME="TGT_FIL_CLEANSE" TRANSFORMATIONTYPE="Target Definition" PARTITIONTYPE="PASS THROUGH" ISREPARTITIONPOINT="NO" STAGE="4" PIPELINE="0"/>
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="FIL_CLEANSE" TRANSFORMATIONNAME="FIL_CLEANSE" TRANSFORMATIONTYPE="Filter" ISREPARTITIONPOINT="NO" STAGE="5" PIPELINE="0">
+                        <PARTITION NAME="Partition #1" DESCRIPTION=""/>
+                    </SESSTRANSFORMATIONINST>
+                    <CONFIGREFERENCE REFOBJECTNAME="default_session_config" TYPE="Session config">
+                        <ATTRIBUTE NAME="Stop on errors" VALUE="$PMSessionErrorThreshold"/>
+                    </CONFIGREFERENCE>
+                    <SESSIONEXTENSION NAME="Relational Reader" TYPE="READER" SUBTYPE="Relational Reader" SINSTANCENAME="EXP_LENGHT" TRANSFORMATIONTYPE="Source Definition" DSQINSTNAME="SQ_EXP_LENGHT" DSQINSTTYPE="Source Qualifier"/>
+                    <SESSIONEXTENSION NAME="Relational Reader" TYPE="READER" SUBTYPE="Relational Reader" SINSTANCENAME="SQ_EXP_LENGHT" TRANSFORMATIONTYPE="Source Qualifier">
+                        <CONNECTIONREFERENCE CNXREFNAME="DB Connection" CONNECTIONTYPE="Relational" CONNECTIONSUBTYPE="" CONNECTIONNUMBER="1" CONNECTIONNAME="" VARIABLE="$DBConnectionCSS"/>
+                    </SESSIONEXTENSION>
+                    <ATTRIBUTE NAME="General Options" VALUE=""/>
+                    <ATTRIBUTE NAME="Write Backward Compatible Session Log File" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Session Log File Name" VALUE="$PMSessionLogFile"/>
+                    <ATTRIBUTE NAME="Session Log File directory" VALUE="$PMSessionLogDir\"/>
+                    <ATTRIBUTE NAME="Parameter Filename" VALUE="$PMSourceFileDir/xdcssd/paramfiles/ipccss.param"/>
+                    <ATTRIBUTE NAME="Enable Test Load" VALUE="NO"/>
+                    <ATTRIBUTE NAME="$Source connection value" VALUE=""/>
+                    <ATTRIBUTE NAME="$Target connection value" VALUE="$DBConnectionCSS"/>
+                    <ATTRIBUTE NAME="Treat source rows as" VALUE="Insert"/>
+                    <ATTRIBUTE NAME="Commit Type" VALUE="Target"/>
+                    <ATTRIBUTE NAME="Commit Interval" VALUE="10000"/>
+                    <ATTRIBUTE NAME="Commit On End Of File" VALUE="YES"/>
+                    <ATTRIBUTE NAME="Rollback Transactions on Errors" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Recovery Strategy" VALUE="Fail task and continue workflow"/>
+                    <ATTRIBUTE NAME="Java Classpath" VALUE=""/>
+                    <ATTRIBUTE NAME="Performance" VALUE=""/>
+                    <ATTRIBUTE NAME="DTM buffer size" VALUE="24000000"/>
+                    <ATTRIBUTE NAME="Collect performance data" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Write performance data to repository" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Incremental Aggregation" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Session retry on deadlock" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Pushdown Optimization" VALUE="None"/>
+                    <ATTRIBUTE NAME="Allow Temporary View for Pushdown" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Allow Temporary Sequence for Pushdown" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Allow Pushdown for User Incompatible Connections" VALUE="NO"/>
+                </SESSION>
+                <TASKINSTANCE NAME="Start" DESCRIPTION="" TASKTYPE="Start" TASKNAME="Start" ISENABLED="YES" REUSABLE="NO"/>
+                <TASKINSTANCE NAME="s_m_CSS55_AR_ZNAHYRLOAD" DESCRIPTION="This wf will read css55znarhrchy.tmp located in the Temp folder and fill the data in the following tables:    CSS55LF10T  CSS55LF11T  CSS55LF18T  CSS55LF19T" TASKTYPE="Session" TASKNAME="s_m_CSS55_AR_ZNAHYRLOAD" ISENABLED="YES" REUSABLE="NO" TREAT_INPUTLINK_AS_AND="YES" FAIL_PARENT_IF_INSTANCE_FAILS="YES" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.StartTime" DESCRIPTION="The time this task started" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.EndTime" DESCRIPTION="The time this task completed" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.Status" DESCRIPTION="Status of this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.PrevTaskStatus" DESCRIPTION="Status of the previous task that is not disabled" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.ErrorCode" DESCRIPTION="Error code for this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.ErrorMsg" DESCRIPTION="Error message for this task's execution" USERDEFINED="NO" DATATYPE="string" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.StartTime" DESCRIPTION="The time this task started" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.EndTime" DESCRIPTION="The time this task completed" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.Status" DESCRIPTION="Status of this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.PrevTaskStatus" DESCRIPTION="Status of the previous task that is not disabled" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.ErrorCode" DESCRIPTION="Error code for this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.ErrorMsg" DESCRIPTION="Error message for this task's execution" USERDEFINED="NO" DATATYPE="string" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.SrcSuccessRows" DESCRIPTION="Rows successfully read" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.SrcFailedRows" DESCRIPTION="Rows failed to read" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.TgtSuccessRows" DESCRIPTION="Rows successfully loaded" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.TgtFailedRows" DESCRIPTION="Rows failed to load" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.TotalTransErrors" DESCRIPTION="Total number of transformation errors" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.FirstErrorCode" DESCRIPTION="First error code" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.FirstErrorMsg" DESCRIPTION="First error message" USERDEFINED="NO" DATATYPE="string" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <ATTRIBUTE NAME="Parameter Filename" VALUE=""/>
+                <ATTRIBUTE NAME="Write Backward Compatible Workflow Log File" VALUE="NO"/>
+                <ATTRIBUTE NAME="Workflow Log File Name" VALUE="wf_CSS55_AR_ZNAHYRLOAD.log"/>
+                <ATTRIBUTE NAME="Workflow Log File Directory" VALUE="$PMWorkflowLogDir\"/>
+                <ATTRIBUTE NAME="Save Workflow log by" VALUE="By runs"/>
+                <ATTRIBUTE NAME="Save workflow log for these runs" VALUE="0"/>
+                <ATTRIBUTE NAME="Service Name" VALUE=""/>
+                <ATTRIBUTE NAME="Service Timeout" VALUE="0"/>
+                <ATTRIBUTE NAME="Is Service Visible" VALUE="NO"/>
+                <ATTRIBUTE NAME="Is Service Protected" VALUE="NO"/>
+                <ATTRIBUTE NAME="Enable HA recovery" VALUE="NO"/>
+                <ATTRIBUTE NAME="Automatically recover terminated tasks" VALUE="NO"/>
+                <ATTRIBUTE NAME="Service Level Name" VALUE="Default"/>
+                <ATTRIBUTE NAME="Allow concurrent run with unique run instance name" VALUE="NO"/>
+                <ATTRIBUTE NAME="Allow concurrent run with same run instance name" VALUE="NO"/>
+                <ATTRIBUTE NAME="Maximum number of concurrent runs" VALUE="0"/>
+                <ATTRIBUTE NAME="Assigned Web Services Hubs" VALUE=""/>
+                <ATTRIBUTE NAME="Maximum number of concurrent runs per Hub" VALUE="1000"/>
+                <ATTRIBUTE NAME="Expected Service Time" VALUE="1"/>
+            </WORKFLOW>
+            <WORKFLOW NAME="wf_EXP_LENGHT" DESCRIPTION="This workflow has been generated from...." SERVERNAME="dipcis01" SERVER_DOMAINNAME="dinfadm01" SCHEDULERNAME="Scheduler" REUSABLE_SCHEDULER="NO" ISVALID="YES" ISENABLED="YES" SUSPEND_ON_ERROR="NO" TASKS_MUST_RUN_ON_SERVER="NO" VERSIONNUMBER="1" ISSERVICE="NO" ISRUNNABLESERVICE="NO">
+                <SCHEDULER NAME="Scheduler" DESCRIPTION="" REUSABLE="NO" VERSIONNUMBER="1">
+                    <SCHEDULEINFO SCHEDULETYPE="ONDEMAND"/>
+                </SCHEDULER>
+                <TASK NAME="Start" DESCRIPTION="" TYPE="Start" REUSABLE="NO" VERSIONNUMBER="1"/>
+                <SESSION NAME="s_m_EXP_LENGHT" DESCRIPTION="" REUSABLE="NO" ISVALID="YES" MAPPINGNAME="m_EXP_LENGHT" SORTORDER="Binary" VERSIONNUMBER="1">
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="SRC_SQ_css00ARextract" TRANSFORMATIONNAME="SRC_SQ_css00ARextract" TRANSFORMATIONTYPE="Source Definition" ISREPARTITIONPOINT="NO" STAGE="0" PIPELINE="0"/>
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="SQ_SQ_css00ARextract" TRANSFORMATIONNAME="SQ_SQ_css00ARextract" TRANSFORMATIONTYPE="Source Qualifier" PARTITIONTYPE="PASS THROUGH" ISREPARTITIONPOINT="YES" STAGE="1" PIPELINE="0"/>
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="TGT_EXP_LENGHT" TRANSFORMATIONNAME="TGT_EXP_LENGHT" TRANSFORMATIONTYPE="Target Definition" PARTITIONTYPE="PASS THROUGH" ISREPARTITIONPOINT="NO" STAGE="4" PIPELINE="0"/>
+                    <SESSTRANSFORMATIONINST SINSTANCENAME="EXP_LENGHT" TRANSFORMATIONNAME="EXP_LENGHT" TRANSFORMATIONTYPE="Expression" ISREPARTITIONPOINT="NO" STAGE="5" PIPELINE="0">
+                        <PARTITION NAME="Partition #1" DESCRIPTION=""/>
+                    </SESSTRANSFORMATIONINST>
+                    <CONFIGREFERENCE REFOBJECTNAME="default_session_config" TYPE="Session config">
+                        <ATTRIBUTE NAME="Stop on errors" VALUE="$PMSessionErrorThreshold"/>
+                    </CONFIGREFERENCE>
+                    <SESSIONEXTENSION NAME="Relational Reader" TYPE="READER" SUBTYPE="Relational Reader" SINSTANCENAME="css00ARextract" TRANSFORMATIONTYPE="Source Definition" DSQINSTNAME="SQ_SQ_css00ARextract" DSQINSTTYPE="Source Qualifier"/>
+                    <SESSIONEXTENSION NAME="Relational Reader" TYPE="READER" SUBTYPE="Relational Reader" SINSTANCENAME="SQ_SQ_css00ARextract" TRANSFORMATIONTYPE="Source Qualifier">
+                        <CONNECTIONREFERENCE CNXREFNAME="DB Connection" CONNECTIONTYPE="Relational" CONNECTIONSUBTYPE="" CONNECTIONNUMBER="1" CONNECTIONNAME="" VARIABLE="$DBConnectionCSS"/>
+                    </SESSIONEXTENSION>
+                    <ATTRIBUTE NAME="General Options" VALUE=""/>
+                    <ATTRIBUTE NAME="Write Backward Compatible Session Log File" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Session Log File Name" VALUE="$PMSessionLogFile"/>
+                    <ATTRIBUTE NAME="Session Log File directory" VALUE="$PMSessionLogDir\"/>
+                    <ATTRIBUTE NAME="Parameter Filename" VALUE="$PMSourceFileDir/xdcssd/paramfiles/ipccss.param"/>
+                    <ATTRIBUTE NAME="Enable Test Load" VALUE="NO"/>
+                    <ATTRIBUTE NAME="$Source connection value" VALUE=""/>
+                    <ATTRIBUTE NAME="$Target connection value" VALUE="$DBConnectionCSS"/>
+                    <ATTRIBUTE NAME="Treat source rows as" VALUE="Insert"/>
+                    <ATTRIBUTE NAME="Commit Type" VALUE="Target"/>
+                    <ATTRIBUTE NAME="Commit Interval" VALUE="10000"/>
+                    <ATTRIBUTE NAME="Commit On End Of File" VALUE="YES"/>
+                    <ATTRIBUTE NAME="Rollback Transactions on Errors" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Recovery Strategy" VALUE="Fail task and continue workflow"/>
+                    <ATTRIBUTE NAME="Java Classpath" VALUE=""/>
+                    <ATTRIBUTE NAME="Performance" VALUE=""/>
+                    <ATTRIBUTE NAME="DTM buffer size" VALUE="24000000"/>
+                    <ATTRIBUTE NAME="Collect performance data" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Write performance data to repository" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Incremental Aggregation" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Session retry on deadlock" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Pushdown Optimization" VALUE="None"/>
+                    <ATTRIBUTE NAME="Allow Temporary View for Pushdown" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Allow Temporary Sequence for Pushdown" VALUE="NO"/>
+                    <ATTRIBUTE NAME="Allow Pushdown for User Incompatible Connections" VALUE="NO"/>
+                </SESSION>
+                <TASKINSTANCE NAME="Start" DESCRIPTION="" TASKTYPE="Start" TASKNAME="Start" ISENABLED="YES" REUSABLE="NO"/>
+                <TASKINSTANCE NAME="s_m_CSS55_AR_ZNAHYRLOAD" DESCRIPTION="This wf will read css55znarhrchy.tmp located in the Temp folder and fill the data in the following tables:    CSS55LF10T  CSS55LF11T  CSS55LF18T  CSS55LF19T" TASKTYPE="Session" TASKNAME="s_m_CSS55_AR_ZNAHYRLOAD" ISENABLED="YES" REUSABLE="NO" TREAT_INPUTLINK_AS_AND="YES" FAIL_PARENT_IF_INSTANCE_FAILS="YES" FAIL_PARENT_IF_INSTANCE_DID_NOT_RUN="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.StartTime" DESCRIPTION="The time this task started" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.EndTime" DESCRIPTION="The time this task completed" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.Status" DESCRIPTION="Status of this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.PrevTaskStatus" DESCRIPTION="Status of the previous task that is not disabled" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.ErrorCode" DESCRIPTION="Error code for this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$Start.ErrorMsg" DESCRIPTION="Error message for this task's execution" USERDEFINED="NO" DATATYPE="string" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.StartTime" DESCRIPTION="The time this task started" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.EndTime" DESCRIPTION="The time this task completed" USERDEFINED="NO" DATATYPE="date/time" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.Status" DESCRIPTION="Status of this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.PrevTaskStatus" DESCRIPTION="Status of the previous task that is not disabled" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.ErrorCode" DESCRIPTION="Error code for this task's execution" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.ErrorMsg" DESCRIPTION="Error message for this task's execution" USERDEFINED="NO" DATATYPE="string" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.SrcSuccessRows" DESCRIPTION="Rows successfully read" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.SrcFailedRows" DESCRIPTION="Rows failed to read" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.TgtSuccessRows" DESCRIPTION="Rows successfully loaded" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.TgtFailedRows" DESCRIPTION="Rows failed to load" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.TotalTransErrors" DESCRIPTION="Total number of transformation errors" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.FirstErrorCode" DESCRIPTION="First error code" USERDEFINED="NO" DATATYPE="integer" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <WORKFLOWVARIABLE NAME="$s_m_CSS55_AR_ZNAHYRLOAD.FirstErrorMsg" DESCRIPTION="First error message" USERDEFINED="NO" DATATYPE="string" DEFAULTVALUE="" ISPERSISTENT="NO" ISNULL="NO"/>
+                <ATTRIBUTE NAME="Parameter Filename" VALUE=""/>
+                <ATTRIBUTE NAME="Write Backward Compatible Workflow Log File" VALUE="NO"/>
+                <ATTRIBUTE NAME="Workflow Log File Name" VALUE="wf_CSS55_AR_ZNAHYRLOAD.log"/>
+                <ATTRIBUTE NAME="Workflow Log File Directory" VALUE="$PMWorkflowLogDir\"/>
+                <ATTRIBUTE NAME="Save Workflow log by" VALUE="By runs"/>
+                <ATTRIBUTE NAME="Save workflow log for these runs" VALUE="0"/>
+                <ATTRIBUTE NAME="Service Name" VALUE=""/>
+                <ATTRIBUTE NAME="Service Timeout" VALUE="0"/>
+                <ATTRIBUTE NAME="Is Service Visible" VALUE="NO"/>
+                <ATTRIBUTE NAME="Is Service Protected" VALUE="NO"/>
+                <ATTRIBUTE NAME="Enable HA recovery" VALUE="NO"/>
+                <ATTRIBUTE NAME="Automatically recover terminated tasks" VALUE="NO"/>
+                <ATTRIBUTE NAME="Service Level Name" VALUE="Default"/>
+                <ATTRIBUTE NAME="Allow concurrent run with unique run instance name" VALUE="NO"/>
+                <ATTRIBUTE NAME="Allow concurrent run with same run instance name" VALUE="NO"/>
+                <ATTRIBUTE NAME="Maximum number of concurrent runs" VALUE="0"/>
+                <ATTRIBUTE NAME="Assigned Web Services Hubs" VALUE=""/>
+                <ATTRIBUTE NAME="Maximum number of concurrent runs per Hub" VALUE="1000"/>
+                <ATTRIBUTE NAME="Expected Service Time" VALUE="1"/>
+            </WORKFLOW>
+            <SOURCE NAME="SRC_EXP_LENGHT" DBDNAME="ODBC" BUSINESSNAME="" DESCRIPTION="GENERATED SOURCE FOR FIL_CLEANSE-TRANSFORMATION." OBJECTVERSION="1" OWNERNAME="XDCSS" DATABASETYPE="ODBC" VERSIONNUMBER="1">
+                <SOURCEFIELD NAME="ROW_LENGHT" BUSINESSNAME="" DESCRIPTION="" DATATYPE="varchar" KEYTYPE="NOT A KEY" PRECISION="5" SCALE="0" USAGE_FLAGS="" LEVEL="0" FIELDTYPE="ELEMITEM" PICTURETEXT="" OCCURS="0" OFFSET="0" PHYSICALOFFSET="0" PHYSICALLENGTH="5" FIELDNUMBER="1" FIELDPROPERTY="0" HIDDEN="NO"/>
+                <SOURCEFIELD NAME="ROW_HEADER" BUSINESSNAME="" DESCRIPTION="" DATATYPE="varchar" KEYTYPE="NOT A KEY" PRECISION="5" SCALE="0" USAGE_FLAGS="" LEVEL="0" FIELDTYPE="ELEMITEM" PICTURETEXT="" OCCURS="0" OFFSET="11" PHYSICALOFFSET="5" PHYSICALLENGTH="5" FIELDNUMBER="1" FIELDPROPERTY="0" HIDDEN="NO"/>
+                <SOURCEFIELD NAME="COMPLETE_ROW" BUSINESSNAME="" DESCRIPTION="" DATATYPE="varchar" KEYTYPE="NOT A KEY" PRECISION="400" SCALE="0" USAGE_FLAGS="" LEVEL="0" FIELDTYPE="ELEMITEM" PICTURETEXT="" OCCURS="0" OFFSET="11" PHYSICALOFFSET="10" PHYSICALLENGTH="400" FIELDNUMBER="2" FIELDPROPERTY="0" HIDDEN="NO"/>
+            </SOURCE>
+            <SOURCE NAME="SRC_SQ_css00ARextract" DBDNAME="ODBC" BUSINESSNAME="" DESCRIPTION="GENERATED SOURCE FOR EXP_LENGHT-TRANSFORMATION." OBJECTVERSION="1" OWNERNAME="XDCSS" DATABASETYPE="ODBC" VERSIONNUMBER="1">
+                <SOURCEFIELD NAME="COMPLETE_ROW" BUSINESSNAME="" DESCRIPTION="" DATATYPE="varchar" KEYTYPE="NOT A KEY" PRECISION="400" SCALE="0" USAGE_FLAGS="" LEVEL="0" FIELDTYPE="ELEMITEM" PICTURETEXT="" OCCURS="0" OFFSET="0" PHYSICALOFFSET="0" PHYSICALLENGTH="400" FIELDNUMBER="1" FIELDPROPERTY="0" HIDDEN="NO"/>
+            </SOURCE>
+            <TARGET NAME="TGT_FIL_CLEANSE" BUSINESSNAME="" DESCRIPTION="GENERATED TARGET FOR FIL_CLEANSE-TRANSFORMATION." OBJECTVERSION="1" CONSTRAINT="" TABLEOPTIONS="" DATABASETYPE="DB2" VERSIONNUMBER="1">
+                <TARGETFIELD NAME="COMPLETE_ROW" BUSINESSNAME="" DESCRIPTION="" DATATYPE="varchar" KEYTYPE="NOT A KEY" PRECISION="400" SCALE="0" FIELDNUMBER="1" NULLABLE="NULL" PICTURETEXT=""/>
+            </TARGET>
+            <TARGET NAME="TGT_EXP_LENGHT" BUSINESSNAME="" DESCRIPTION="GENERATED TARGET FOR EXP_LENGHT-TRANSFORMATION." OBJECTVERSION="1" CONSTRAINT="" TABLEOPTIONS="" DATABASETYPE="DB2" VERSIONNUMBER="1">
+                <TARGETFIELD NAME="ROW_LENGHT" BUSINESSNAME="" DESCRIPTION="" DATATYPE="small integer" KEYTYPE="NOT A KEY" PRECISION="5" SCALE="0" FIELDNUMBER="1" NULLABLE="NULL" PICTURETEXT=""/>
+                <TARGETFIELD NAME="ROW_HEADER" BUSINESSNAME="" DESCRIPTION="" DATATYPE="small integer" KEYTYPE="NOT A KEY" PRECISION="5" SCALE="0" FIELDNUMBER="1" NULLABLE="NULL" PICTURETEXT=""/>
+                <TARGETFIELD NAME="ROWOUT" BUSINESSNAME="" DESCRIPTION="" DATATYPE="varchar" KEYTYPE="NOT A KEY" PRECISION="410" SCALE="0" FIELDNUMBER="1" NULLABLE="NULL" PICTURETEXT=""/>
+            </TARGET>
+            <MAPPING NAME="m_FIL_CLEANSE" DESCRIPTION="MAPPING GENERATED WITH SCRIPT." OBJECTVERSION="1" ISVALID="YES" VERSIONNUMBER="1">
+                <TRANSFORMATION NAME="FIL_CLEANSE" DESCRIPTION="Discard marked rows, allowing real data and not SAP metadata to continue" TYPE="Filter" OBJECTVERSION="1" REUSABLE="NO" VERSIONNUMBER="1">
+                    <TRANSFORMFIELD NAME="ROW_LENGHT" DESCRIPTION="" DATATYPE="small integer" PORTTYPE="INPUT/OUTPUT" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TRANSFORMFIELD NAME="COMPLETE_ROW" DESCRIPTION="" DATATYPE="string" PORTTYPE="INPUT/OUTPUT" PRECISION="400" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TRANSFORMFIELD NAME="ROW_HEADER" DESCRIPTION="" DATATYPE="small integer" PORTTYPE="INPUT/OUTPUT" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TABLEATTRIBUTE NAME="Filter Condition" VALUE="ROW_LENGHT AND ROW_HEADER"/>
+                    <TABLEATTRIBUTE NAME="Tracing Level" VALUE="Normal"/>
+                </TRANSFORMATION>
+                <TRANSFORMATION NAME="SQ_EXP_LENGHT" DESCRIPTION="Source qualifier for EXP_LENGHT" TYPE="Source Qualifier" OBJECTVERSION="1" REUSABLE="NO" VERSIONNUMBER="1" COMPONENTVERSION="1">
+                    <TRANSFORMFIELD NAME="ROW_LENGHT" DESCRIPTION="" DATATYPE="string" PORTTYPE="INPUT/OUTPUT" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TRANSFORMFIELD NAME="ROW_HEADER" DESCRIPTION="" DATATYPE="string" PORTTYPE="INPUT/OUTPUT" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TRANSFORMFIELD NAME="COMPLETE_ROW" DESCRIPTION="" DATATYPE="string" PORTTYPE="INPUT/OUTPUT" PRECISION="400" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TABLEATTRIBUTE NAME="SQL Query" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="User Defined Join" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Source Filter" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Number Of Sorted Ports" VALUE="0"/>
+                    <TABLEATTRIBUTE NAME="Tracing Level" VALUE="Normal"/>
+                    <TABLEATTRIBUTE NAME="Select Distinct" VALUE="NO"/>
+                    <TABLEATTRIBUTE NAME="Is Partitionable" VALUE="NO"/>
+                    <TABLEATTRIBUTE NAME="Pre SQL" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Post SQL" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Output is deterministic" VALUE="NO"/>
+                    <TABLEATTRIBUTE NAME="Output is repeatable" VALUE="NEVER"/>
+                </TRANSFORMATION>
+                <INSTANCE NAME="SRC_EXP_LENGHT" DESCRIPTION="" TYPE="SOURCE" TRANSFORMATION_TYPE="Source Definition" TRANSFORMATION_NAME="SRC_EXP_LENGHT" DBDNAME="ODBC"/>
+                <INSTANCE NAME="SQ_EXP_LENGHT" DESCRIPTION="" TYPE="TRANSFORMATION" TRANSFORMATION_TYPE="Source Qualifier" TRANSFORMATION_NAME="SQ_EXP_LENGHT">
+                    <ASSOCIATED_SOURCE_INSTANCE NAME="SQ_EXP_LENGHT"/>
+                </INSTANCE>
+                <INSTANCE NAME="TGT_FIL_CLEANSE" DESCRIPTION="" TYPE="TARGET" TRANSFORMATION_TYPE="Target Definition" TRANSFORMATION_NAME="TGT_FIL_CLEANSE"/>
+                <INSTANCE NAME="FIL_CLEANSE" DESCRIPTION="" TYPE="TRANSFORMATION" REUSABLE="NO" TRANSFORMATION_TYPE="Filter" TRANSFORMATION_NAME="FIL_CLEANSE"/>
+                <CONNECTOR FROMINSTANCE="SRC_EXP_LENGHT" FROMINSTANCETYPE="Source Definition" FROMFIELD="ROW_LENGHT" TOINSTANCE="SQ_EXP_LENGHT" TOINSTANCETYPE="Source Qualifier" TOFIELD="ROW_LENGHT"/>
+                <CONNECTOR FROMINSTANCE="SQ_EXP_LENGHT" FROMINSTANCETYPE="Source Qualifier" FROMFIELD="ROW_LENGHT" TOINSTANCE="FIL_CLEANSE" TOINSTANCETYPE="Filter" TOFIELD="ROW_LENGHT"/>
+                <CONNECTOR FROMINSTANCE="SRC_EXP_LENGHT" FROMINSTANCETYPE="Source Definition" FROMFIELD="ROW_HEADER" TOINSTANCE="SQ_EXP_LENGHT" TOINSTANCETYPE="Source Qualifier" TOFIELD="ROW_HEADER"/>
+                <CONNECTOR FROMINSTANCE="SQ_EXP_LENGHT" FROMINSTANCETYPE="Source Qualifier" FROMFIELD="ROW_HEADER" TOINSTANCE="FIL_CLEANSE" TOINSTANCETYPE="Filter" TOFIELD="ROW_HEADER"/>
+                <CONNECTOR FROMINSTANCE="SRC_EXP_LENGHT" FROMINSTANCETYPE="Source Definition" FROMFIELD="COMPLETE_ROW" TOINSTANCE="SQ_EXP_LENGHT" TOINSTANCETYPE="Source Qualifier" TOFIELD="COMPLETE_ROW"/>
+                <CONNECTOR FROMINSTANCE="SQ_EXP_LENGHT" FROMINSTANCETYPE="Source Qualifier" FROMFIELD="COMPLETE_ROW" TOINSTANCE="FIL_CLEANSE" TOINSTANCETYPE="Filter" TOFIELD="COMPLETE_ROW"/>
+                <CONNECTOR FROMINSTANCE="FIL_CLEANSE" FROMINSTANCETYPE="Filter" FROMFIELD="COMPLETE_ROW" TOINSTANCE="TGT_FIL_CLEANSE" TOINSTANCETYPE="Target Definition" TOFIELD="COMPLETE_ROW"/>
+                <TARGETLOADORDER TARGETINSTANCE="TGT_FIL_CLEANSE" ORDER="1"/>
+                <ERPINFO/>
+            </MAPPING>
+            <MAPPING NAME="m_EXP_LENGHT" DESCRIPTION="MAPPING GENERATED WITH SCRIPT." OBJECTVERSION="1" ISVALID="YES" VERSIONNUMBER="1">
+                <TRANSFORMATION NAME="EXP_LENGHT" DESCRIPTION="Inspects the rows to determine which one will proceed an which one will be discarded. We also take the key date from the first row and add it to each row." TYPE="Expression" OBJECTVERSION="1" REUSABLE="NO" VERSIONNUMBER="1">
+                    <TRANSFORMFIELD NAME="COMPLETE_ROW" DESCRIPTION="" DATATYPE="string" PORTTYPE="INPUT" PRECISION="400" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TRANSFORMFIELD NAME="COMPLETE_ROW_v" DESCRIPTION="" DATATYPE="string" PORTTYPE="LOCAL VARIABLE" PRECISION="400" SCALE="0" PICTURETEXT="" DEFAULTVALUE="" EXPRESSION="RTRIM(SUBSTR(COMPLETE_ROW,0,Length(RTRIM(COMPLETE_ROW))-1))      " EXPRESSIONTYPE="GENERAL"/>
+                    <TRANSFORMFIELD NAME="ROW_NUMBER_v" DESCRIPTION="" DATATYPE="small integer" PORTTYPE="LOCAL VARIABLE" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE="" EXPRESSION="ROW_NUMBER_v+1" EXPRESSIONTYPE="GENERAL"/>
+                    <TRANSFORMFIELD NAME="KEY_DATE_v" DESCRIPTION="" DATATYPE="string" PORTTYPE="LOCAL VARIABLE" PRECISION="10" SCALE="0" PICTURETEXT="" DEFAULTVALUE="" EXPRESSION="IIF(REG_MATCH(SUBSTR(COMPLETE_ROW,35,10),'(\d\d/\d\d/\d\d\d\d)'),SUBSTR(COMPLETE_ROW,35,10),KEY_DATE_v)    " EXPRESSIONTYPE="GENERAL"/>
+                    <TRANSFORMFIELD NAME="ROW_HEADER" DESCRIPTION="" DATATYPE="small integer" PORTTYPE="OUTPUT" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE="ERROR('transformation error')" EXPRESSION="IIF((  (SUBSTR(COMPLETE_ROW,1,length('---------------'))='---------------'))     OR (SUBSTR(COMPLETE_ROW,1,length('| CoCd BPartner'))='| CoCd BPartner')    OR (SUBSTR(COMPLETE_ROW,1,length('|*             '))='|*             ')    OR (SUBSTR(COMPLETE_ROW,1,length('|         '))='|         '),    0,    1)" EXPRESSIONTYPE="GENERAL"/>
+                    <TRANSFORMFIELD NAME="ROW_LENGHT" DESCRIPTION="" DATATYPE="small integer" PORTTYPE="OUTPUT" PRECISION="5" SCALE="0" PICTURETEXT="" DEFAULTVALUE="ERROR('transformation error')" EXPRESSION="IIF((LENGTH(COMPLETE_ROW)&gt;290),1,0)" EXPRESSIONTYPE="GENERAL"/>
+                    <TRANSFORMFIELD NAME="ROWOUT" DESCRIPTION="" DATATYPE="string" PORTTYPE="OUTPUT" PRECISION="410" SCALE="0" PICTURETEXT="" DEFAULTVALUE="ERROR('transformation error')" EXPRESSION="IIF(LENGTH(COMPLETE_ROW_v)&lt;$$file_length  ,  RPAD(COMPLETE_ROW_v,$$file_length-1,' ')|| '|' || KEY_DATE_v  ,  substr(COMPLETE_ROW,1,$$file_length-1)|| '|' || KEY_DATE_v  )    " EXPRESSIONTYPE="GENERAL"/>
+                    <TABLEATTRIBUTE NAME="Tracing Level" VALUE="Normal"/>
+                </TRANSFORMATION>
+                <TRANSFORMATION NAME="SQ_SQ_css00ARextract" DESCRIPTION="Source qualifier for SQ_css00ARextract" TYPE="Source Qualifier" OBJECTVERSION="1" REUSABLE="NO" VERSIONNUMBER="1" COMPONENTVERSION="1">
+                    <TRANSFORMFIELD NAME="COMPLETE_ROW" DESCRIPTION="" DATATYPE="string" PORTTYPE="INPUT/OUTPUT" PRECISION="400" SCALE="0" PICTURETEXT="" DEFAULTVALUE=""/>
+                    <TABLEATTRIBUTE NAME="SQL Query" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="User Defined Join" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Source Filter" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Number Of Sorted Ports" VALUE="0"/>
+                    <TABLEATTRIBUTE NAME="Tracing Level" VALUE="Normal"/>
+                    <TABLEATTRIBUTE NAME="Select Distinct" VALUE="NO"/>
+                    <TABLEATTRIBUTE NAME="Is Partitionable" VALUE="NO"/>
+                    <TABLEATTRIBUTE NAME="Pre SQL" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Post SQL" VALUE=""/>
+                    <TABLEATTRIBUTE NAME="Output is deterministic" VALUE="NO"/>
+                    <TABLEATTRIBUTE NAME="Output is repeatable" VALUE="NEVER"/>
+                </TRANSFORMATION>
+                <INSTANCE NAME="SRC_SQ_css00ARextract" DESCRIPTION="" TYPE="SOURCE" TRANSFORMATION_TYPE="Source Definition" TRANSFORMATION_NAME="SRC_SQ_css00ARextract" DBDNAME="ODBC"/>
+                <INSTANCE NAME="SQ_SQ_css00ARextract" DESCRIPTION="" TYPE="TRANSFORMATION" TRANSFORMATION_TYPE="Source Qualifier" TRANSFORMATION_NAME="SQ_SQ_css00ARextract">
+                    <ASSOCIATED_SOURCE_INSTANCE NAME="SQ_SQ_css00ARextract"/>
+                </INSTANCE>
+                <INSTANCE NAME="TGT_EXP_LENGHT" DESCRIPTION="" TYPE="TARGET" TRANSFORMATION_TYPE="Target Definition" TRANSFORMATION_NAME="TGT_EXP_LENGHT"/>
+                <INSTANCE NAME="EXP_LENGHT" DESCRIPTION="" TYPE="TRANSFORMATION" REUSABLE="NO" TRANSFORMATION_TYPE="Expression" TRANSFORMATION_NAME="EXP_LENGHT"/>
+                <CONNECTOR FROMINSTANCE="SRC_SQ_css00ARextract" FROMINSTANCETYPE="Source Definition" FROMFIELD="COMPLETE_ROW" TOINSTANCE="SQ_SQ_css00ARextract" TOINSTANCETYPE="Source Qualifier" TOFIELD="COMPLETE_ROW"/>
+                <CONNECTOR FROMINSTANCE="SQ_SQ_css00ARextract" FROMINSTANCETYPE="Source Qualifier" FROMFIELD="COMPLETE_ROW" TOINSTANCE="EXP_LENGHT" TOINSTANCETYPE="Expression" TOFIELD="COMPLETE_ROW"/>
+                <CONNECTOR FROMINSTANCE="EXP_LENGHT" FROMINSTANCETYPE="Expression" FROMFIELD="ROW_LENGHT" TOINSTANCE="TGT_EXP_LENGHT" TOINSTANCETYPE="Target Definition" TOFIELD="ROW_LENGHT"/>
+                <CONNECTOR FROMINSTANCE="EXP_LENGHT" FROMINSTANCETYPE="Expression" FROMFIELD="ROW_HEADER" TOINSTANCE="TGT_EXP_LENGHT" TOINSTANCETYPE="Target Definition" TOFIELD="ROW_HEADER"/>
+                <CONNECTOR FROMINSTANCE="EXP_LENGHT" FROMINSTANCETYPE="Expression" FROMFIELD="ROWOUT" TOINSTANCE="TGT_EXP_LENGHT" TOINSTANCETYPE="Target Definition" TOFIELD="ROWOUT"/>
+                <TARGETLOADORDER TARGETINSTANCE="TGT_EXP_LENGHT" ORDER="1"/>
+                <ERPINFO/>
+            </MAPPING>
+        </FOLDER>
+    </REPOSITORY>
+</POWERMART>

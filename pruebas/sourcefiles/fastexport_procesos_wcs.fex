@@ -1,0 +1,19 @@
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/procesos_wcs.txt
+  FORMAT TEXT MODE RECORD;
+
+
+SELECT CAST(TRIM(proceso) AS CHAR(40)) 
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+WHERE 
+  fase_carga='FASE_WCS'
+  AND ind_activo = 'S'
+ORDER BY 
+	orden_proceso;
+
+.END EXPORT;
+
+.LOGOFF;
+

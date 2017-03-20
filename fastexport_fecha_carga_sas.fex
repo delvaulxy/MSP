@@ -1,0 +1,35 @@
+
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/fecha_carga_sas.txt
+  FORMAT TEXT MODE RECORD;
+
+SELECT CAST((CURRENT_DATE-1 (FORMAT 'YYYYMMDD')) AS CHAR(8))
+      FROM &bd_ctl&.CTL_FECHAS_DM_V  f
+INNER JOIN &bd_ctl&.CTL_LOG_PROCESOS l1 ON (l1.fecha_carga = CURRENT_DATE-1)
+INNER JOIN &bd_ctl&.CTL_LOG_PROCESOS l2 ON (l2.fecha_carga = CURRENT_DATE-1)
+INNER JOIN &bd_dim&.DIM_DIA          d  ON (d.fec_dia = CURRENT_DATE)
+     WHERE f.datamart = 'FASE_SAS'
+       AND f.fec_ultima_carga_dm_empezada=f.fec_ultima_carga_dm_finalizada
+       AND f.fec_ultima_carga_dm_empezada < CURRENT_DATE -1
+       AND l1.proceso = 'fac_picos_gdp.sql'
+       AND l1.fecha_fin IS NOT NULL
+       AND l2.proceso = 'fac_inventario_actual.sql'
+       AND l2.fecha_fin IS NOT NULL
+       AND d.id_dia_de_semana <> 7
+GROUP BY 1;
+
+    SELECT CAST((CURRENT_DATE-1 (FORMAT 'YYYYMMDD')) AS CHAR(8))
+      FROM &bd_ctl&.CTL_FECHAS_DM_V  f
+INNER JOIN &bd_dim&.DIM_DIA          d  ON (d.fec_dia = CURRENT_DATE)
+     WHERE f.datamart = 'FASE_SAS'
+     AND f.fec_ultima_carga_dm_empezada=f.fec_ultima_carga_dm_finalizada
+     AND f.fec_ultima_carga_dm_empezada < CURRENT_DATE -1
+     AND d.id_dia_de_semana = 7
+GROUP BY 1;
+
+
+.END EXPORT;
+
+.LOGOFF;

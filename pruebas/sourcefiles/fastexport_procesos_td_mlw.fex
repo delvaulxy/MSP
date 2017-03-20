@@ -1,0 +1,19 @@
+
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/procesos_mlw.txt
+  FORMAT TEXT MODE RECORD;
+
+SELECT CAST(TRIM(proceso) AS CHAR(40))
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+CROSS JOIN &bd_ctl&.CTL_FECHAS_V
+WHERE 
+  hoy_es_festivo_palau = 'No' AND
+  ind_activo = 'S' AND  
+  fase_carga in ('FASE_MLW')
+ORDER BY fase_carga, orden_proceso;
+
+.END EXPORT;
+
+.LOGOFF;

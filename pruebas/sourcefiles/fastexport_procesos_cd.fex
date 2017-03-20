@@ -1,0 +1,21 @@
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/procesos_cd.txt
+  FORMAT TEXT MODE RECORD;
+
+
+SELECT CAST(TRIM(proceso) AS CHAR(40)) 
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+CROSS JOIN &bd_ctl&.CTL_FECHAS_V
+WHERE 
+  fase_carga='FASE_CROSS'
+  AND ind_activo = 'S'
+  AND hoy_es_festivo_palau = 'No'
+ORDER BY 
+	orden_proceso;
+
+.END EXPORT;
+
+.LOGOFF;
+

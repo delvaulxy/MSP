@@ -1,0 +1,5 @@
+CREATE TABLE CSS01LF03T( 
+BASE_MONTH_ACCUM_ID integer(10),
+MONTHLY_ACCUM_ID smallint(5),
+MONTH_ID integer(10)
+);

@@ -1,0 +1,18 @@
+.BEGIN EXPORT
+  SESSIONS 9;
+
+.EXPORT OUTFILE ../../INTERCAMBIOS/TMP/procesos_scm.txt
+  FORMAT TEXT MODE RECORD;
+
+
+SELECT CAST(TRIM(proceso) AS CHAR(40)) 
+FROM &bd_ctl&.CTL_PROCESOS_CARGA
+WHERE 
+  fase_carga='FASE_SCM'
+ORDER BY 
+	orden_proceso;
+
+.END EXPORT;
+
+.LOGOFF;
+
